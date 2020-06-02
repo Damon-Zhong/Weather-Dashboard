@@ -61,4 +61,8 @@ function displayForecast(item,index){
     }
 }
 
+function clearHistory(){
+    localStorage.clear();
+}
+
 initialize();
