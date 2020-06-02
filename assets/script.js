@@ -5,16 +5,15 @@ const HumidityEl = document.querySelector("#Humidity");
 const UVEl = document.querySelector("#UV");
 const historyEl = document.querySelector("#History");
 let searchHistory = localStorage.searchHistory ? JSON.parse(localStorage.searchHistory) : [];
-let forecastDays = 0;
 
 //Display user search history
 function initialize(){
     historyEl.innerHTML = '';
-    forecastDays = 0;
     searchHistory.forEach(function(item){
         historyEl.innerHTML += `<li class="list-group-item">${item}</li>`
         console.log(item);
     })
+
 }
 
 //Fetching weather based on search box input
@@ -24,6 +23,7 @@ async function fetchWeather( ){
     let currentDate = moment().format('M/D/YYYY');
     let api = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=495dfed177b7e905cf8926b7461cc3b6`;
     const result = await fetch( api ).then( (result)=>result.json() );
+    if(result)console.log(`${result} fetch successfully`)
     //If city name found, display weather info on screen; if city name not found, display error message
     if(result.name == cityName ){
         locationEl.innerHTML = `${result.name} (${currentDate}) <img src="http://openweathermap.org/img/wn/${result.weather[0].icon}@2x.png" width="50" height="50">`;
@@ -38,6 +38,7 @@ async function fetchWeather( ){
     //Retrieve 5 days forecast info and display
     let apiForecast = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&units=metric&appid=495dfed177b7e905cf8926b7461cc3b6`
     const forecast = await fetch( apiForecast ).then( (result)=>result.json() );
+    document.querySelector("#Forecast").innerHTML = '';
     forecast.list.forEach(displayForecast);
 
     //Save search history to local storage
@@ -47,8 +48,9 @@ async function fetchWeather( ){
 }
 
 function displayForecast(item,index){
-    if(index % 8 == 0 && forecastDays<5){
+    if(index % 8 == 0 && index<40){
         let Date = moment().add(index/8+1,'days').format('M/D/YYYY');
+        console.log(index, Date)
         document.querySelector("#Forecast").innerHTML += 
         `<div class="card-body forecast">
             <h4>${Date}</h4>
@@ -56,7 +58,6 @@ function displayForecast(item,index){
             <p class="Humidity">Temp: ${item.main.temp} ℃</p>
             <p class="WindSpeed">Humidity: ${item.main.humidity}%</p>
         </div>`
-        forecastDays++;
     }
 }
 
