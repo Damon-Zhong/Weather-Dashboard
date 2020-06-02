@@ -21,16 +21,21 @@ async function fetchWeather( ){
     event.preventDefault();
     let cityName = document.querySelector("#searchBox").value;
     let currentDate = moment().format('M/D/YYYY');
+
     let api = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=495dfed177b7e905cf8926b7461cc3b6`;
     const result = await fetch( api ).then( (result)=>result.json() );
-    if(result)console.log(`${result} fetch successfully`)
+    
+    let apiOneCall = `https://api.openweathermap.org/data/2.5/onecall?lat=${result.coord.lat}&lon=${result.coord.lon}&appid=495dfed177b7e905cf8926b7461cc3b6`;
+    const onecallResult = await fetch( apiOneCall ).then( (result)=>result.json() );
+    console.log(onecallResult);
+ 
     //If city name found, display weather info on screen; if city name not found, display error message
     if(result.name == cityName ){
         locationEl.innerHTML = `${result.name} (${currentDate}) <img src="http://openweathermap.org/img/wn/${result.weather[0].icon}@2x.png" width="50" height="50">`;
         TemperatureEl.textContent = `Temperature: ${result.main.temp} ℃`;
         WindSpeedEl.textContent =  `Wind speed: ${result.wind.speed} MPH`;
         HumidityEl.textContent = `Humidity: ${result.main.humidity} %`;
-        UVEl.textContent = `UV Index: `
+        UVEl.innerHTML = `UV Index: <span class="badge badge-primary ">${onecallResult.current.uvi}</span>`
     }else{
         document.querySelector("#DisplayWindow").innerHTML = `<h2>City not found. Please try again.</h2>`;
     }
