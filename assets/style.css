@@ -1,0 +1,49 @@
+body{
+    margin: 0;
+    padding: 0;
+
+}
+nav{
+    justify-items: center;
+}
+nav span{
+    margin: auto;
+    width: 50%;
+}
+.wrapper{
+    margin: 2%;
+}
+
+#searchCity{
+    height: 100%;
+    width: 5%;
+}
+.card-body{
+    width: 100%;
+    height: fit-content;
+}
+
+#Forecast{
+    width: 100%;
+    display: flex;
+    flex-direction:row;
+}
+
+.forecast{
+    background-color: blue;
+    color: white;
+    margin: 1%;
+    border-radius: 3%;
+}
+
+@media all and (min-width: 960px){
+    .forecast{
+        display:flex;
+        flex-direction:column;
+        background-color: blue;
+        color: white;
+        margin: 1%;
+        border-radius: 3%;
+    }
+    
+}
