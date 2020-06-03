@@ -16,50 +16,48 @@
     <title>Weather Dashboard</title>
 </head>
 <body>
+    <!-- Header -->
     <nav class="navbar navbar-dark bg-dark">
-        <!-- Navbar content -->
         <span class="navbar-dark navbar-brand" href="#">
             Weather Dashboard
         </span>
     </nav>
+    <!-- End of Header -->
+    <!-- Main Content -->
     <div class="wrapper">
         <div class="row">
+            <!-- Search box for city input -->
             <div id="searchCity" class="col-4">
-                <form class="form-inline my-2 my-lg-0">
+                <div class="form-inline my-2 my-lg-0">
                     <input id="searchBox" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="fetchWeather()"><i class="fas fa-search"></i></button>
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="clearHistory()">Clear History</button>
-
-                </form>
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="fetchWeather( getCityName() )"><i class="fas fa-search"></i></button>
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="ClearHistory()">Clear History</button>
+                </div>
                 <ul id="History" class="list-group">
-                    <li class="list-group-item">Toronto</li>
-                    <li class="list-group-item">Vanccourer</li>
-                    <li class="list-group-item">Montreal</li>
-                    <li class="list-group-item">Makrham</li>
-                    <li class="list-group-item">Richmond Hill</li>
                 </ul>
             </div>
-            
+            <!-- End of Search box for city input -->
             <div class="card col-8">
+                <!-- Display current weather -->
                 <div id="DisplayWindow" class="card-body">
-                    <h2 id="Location">City name (Date) icon</h2>
+                    <h2 id="Location"></h2>
                     <p id="Temperature">Temperature: </p>
                     <p id="Humidity">Humidity</p>
                     <p id="WindSpeed">Wind Speed</p>
                     <p id="UV">UV index</p>
                 </div>
-                
+                <!-- Display 5 days forecast -->
                 <div id="displayForecast">
                     <h2>5 Days Forecasts</h2>
-                    <div  id="Forecast" class="card">   
+                    <div  id="Forecast" class="card">
+                        
                     </div>
                 </div>
             </div>
-            
         </div>
     </div>
 
-    <script src="./assets/script.js"></script>
+    <script src="./assets/script_02.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 </body>
 </html>
