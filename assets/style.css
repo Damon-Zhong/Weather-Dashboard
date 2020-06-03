@@ -3,20 +3,20 @@ body{
     padding: 0;
 
 }
-nav{
-    justify-items: center;
-}
-nav span{
+header span{
     margin: auto;
     width: 50%;
 }
-.wrapper{
+.row{
     margin: 2%;
 }
 
 #searchCity{
     height: 100%;
     width: 5%;
+}
+ul{
+    width: 100%;
 }
 .card-body{
     width: 100%;
@@ -34,6 +34,7 @@ nav span{
     color: white;
     margin: 1%;
     border-radius: 3%;
+    font-size: 80%;
 }
 
 @media all and (min-width: 960px){
